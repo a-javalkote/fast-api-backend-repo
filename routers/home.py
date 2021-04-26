@@ -4,7 +4,6 @@ import database
 from sqlalchemy.orm import Session
 from fastapi.responses import HTMLResponse
 from schema import shome
-from models import mhome
 from repository import rhome
 
 router = APIRouter(
