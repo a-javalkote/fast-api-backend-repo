@@ -1,11 +1,9 @@
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
-import database
-from models import mhome
-from schema import shome
+import database, models
 
 
 
 def get_all(db: Session = Depends(database.get_db)):
-    posts = db.query(mhome.SiteInfo).all()
+    posts = db.query(models.SiteInfo).all()
     return posts
