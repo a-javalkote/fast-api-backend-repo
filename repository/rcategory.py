@@ -2,7 +2,7 @@ from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
 import database, schemas, models
 
-def get_all(db: Session = Depends(database.get_db)):
+def all_category(db: Session = Depends(database.get_db)):
     Category = db.query(models.Category).all()
     return Category
 
