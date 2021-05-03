@@ -10,9 +10,7 @@ class SiteInfo(BaseModel):
     class Config:
 	    orm_mode=True
 
-
 class Category(BaseModel):
-    id: int
     name: str
     slug: str
     description: str
@@ -23,10 +21,28 @@ class Category(BaseModel):
     class Config:
 	    orm_mode=True
 
+class UpdateCategory(BaseModel):
+    name: str
+    slug: str
+    description: str
+    parent_id: int
+
+    class Config:
+        orm_mode=True
+
 class SingleCategory(BaseModel):
+    id: int
     name: str
     slug: str
     description: str 
+
+    class Config():
+        orm_mode = True
+
+class CategoryForPost(BaseModel):
+    id: int
+    name: str
+    slug: str
 
     class Config():
         orm_mode = True
@@ -43,16 +59,16 @@ class Users(BaseModel):
     class Config:
 	    orm_mode=True
 
-class User(BaseModel):
-    id : int
+class AutherName(BaseModel):
+    id: int
     first_name: str
     last_name: str 
 
     class Config():
         orm_mode = True
 
+
 class Post(BaseModel):
-    id: int
     title: str
     slug: str
     short_desc: str
@@ -75,11 +91,25 @@ class SinglePost(BaseModel):
     slug: str
     description: str 
     post_tag: str
-    category: SingleCategory
-    auther : User
+    category: CategoryForPost
+    auther : AutherName
     meta_desc: str
     meta_keyword: str 
     created_datetime: datetime   
+    
+    class Config():
+        orm_mode = True
+
+class UpdatePost(BaseModel):
+    title: str
+    slug: str
+    short_desc: str
+    description: str 
+    post_tag: str
+    category: CategoryForPost
+    auther : AutherName
+    meta_desc: str
+    meta_keyword: str   
     
     class Config():
         orm_mode = True
@@ -90,7 +120,7 @@ class CategorywisePost(BaseModel):
     slug: str
     short_desc: str 
     post_tag: str
-    auther_id: int  
+    auther : AutherName  
     created_datetime: datetime   
     
     class Config():
@@ -102,8 +132,7 @@ class AutherwisePost(BaseModel):
     slug: str
     short_desc: str 
     post_tag: str
-    category_id: int  
-    auther_id: int  
+    category: CategoryForPost
     created_datetime: datetime   
     
     class Config():
@@ -115,8 +144,8 @@ class TagwisePost(BaseModel):
     slug: str
     short_desc: str 
     post_tag: str 
-    category_id: int 
-    auther_id: int   
+    category: CategoryForPost
+    auther : AutherName 
     created_datetime: datetime   
     
     class Config():
@@ -128,8 +157,8 @@ class SerachwisePost(BaseModel):
     slug: str
     short_desc: str
     post_tag: str
-    category_id: int 
-    auther_id: int  
+    category: CategoryForPost
+    auther : AutherName
     created_datetime: datetime   
     
     class Config():
