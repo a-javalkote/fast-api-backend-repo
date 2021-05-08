@@ -30,12 +30,6 @@ app.add_middleware(
 )
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
-
-app.include_router(auth.router)
-app.include_router(home.router)
-app.include_router(category.router)
-app.include_router(post.router)
-
 templates = Jinja2Templates(directory="templates")
 
 @app.get('/',response_class=HTMLResponse)
@@ -45,3 +39,8 @@ def read_root(request:Request):
 @app.post('/login', status_code=200)
 def login(request: OAuth2PasswordRequestForm = Depends(), db : Session = Depends(get_db)):
     return rauth.login_user(request, db)
+
+app.include_router(auth.router)
+app.include_router(home.router)
+app.include_router(category.router)
+app.include_router(post.router)
