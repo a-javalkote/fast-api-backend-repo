@@ -19,6 +19,16 @@ class Category(Base):
     counter = Column(Integer)
     status = Column(Integer)
 
+    _post = relationship("Post", back_populates="category")
+
+class Role(Base):
+    __tablename__ = 'tblrole'
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    status = Column(Integer)
+
+    role = relationship("Users", back_populates="_role")
+
 class Users(Base):
     __tablename__ = 'tblusers'
     id = Column(Integer, primary_key=True, index=True)
@@ -30,8 +40,11 @@ class Users(Base):
     email_verify = Column(String)
     password_verify = Column(String)
     online_status = Column(String)
-    role_id = Column(Integer)
+    role_id = Column(Integer, ForeignKey('tblrole.id'))
     status = Column(Integer)
+
+    _post = relationship("Post", back_populates="auther")
+    _role = relationship("Role", back_populates="role")
 
 class Post(Base):
     __tablename__ = 'tblpost'
@@ -47,9 +60,10 @@ class Post(Base):
     meta_desc = Column(Text)
     meta_keyword = Column(Text)
     created_datetime = Column(DateTime)
+    published_datetime = Column(DateTime)
     approved = Column(Integer)
     status = Column(Integer)
     
-    category = relationship(Category)
-    auther = relationship(Users)
+    category = relationship("Category", back_populates="_post")
+    auther = relationship("Users", back_populates="_post")
     

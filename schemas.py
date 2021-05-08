@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import List, Optional
 from pydantic.schema import schema
 
+
 class SiteInfo(BaseModel):
     name: Optional[str]
     value: Json
@@ -47,17 +48,6 @@ class CategoryForPost(BaseModel):
     class Config():
         orm_mode = True
 
-class Users(BaseModel):
-    id: int
-    name: str
-    slug: str
-    description: str
-    parent_id: int
-    counter:int
-    status: int
-
-    class Config:
-	    orm_mode=True
 
 class AutherName(BaseModel):
     id: int
@@ -67,7 +57,31 @@ class AutherName(BaseModel):
     class Config():
         orm_mode = True
 
+class Login(BaseModel):
+    username: str
+    password: str
 
+class Register(BaseModel):
+    username: str
+    password: str
+    first_name: str
+    last_name: str
+    email_id: str
+    
+class Users(BaseModel):
+    id: int
+    username: str
+    password: str
+    first_name: str
+    last_name: str
+    email_id: str
+    role_id: int
+    status: int
+
+    class Config:
+	    orm_mode=True
+
+    
 class Post(BaseModel):
     title: str
     slug: str
@@ -80,6 +94,7 @@ class Post(BaseModel):
     auther_id: int
     approved:int
     created_datetime: datetime
+    published_datetime: datetime
     status: int
 
     class Config:
@@ -95,7 +110,7 @@ class SinglePost(BaseModel):
     auther : AutherName
     meta_desc: str
     meta_keyword: str 
-    created_datetime: datetime   
+    published_datetime: datetime   
     
     class Config():
         orm_mode = True
@@ -121,7 +136,7 @@ class CategorywisePost(BaseModel):
     short_desc: str 
     post_tag: str
     auther : AutherName  
-    created_datetime: datetime   
+    published_datetime: datetime   
     
     class Config():
         orm_mode = True
@@ -133,7 +148,7 @@ class AutherwisePost(BaseModel):
     short_desc: str 
     post_tag: str
     category: CategoryForPost
-    created_datetime: datetime   
+    published_datetime: datetime   
     
     class Config():
         orm_mode = True
@@ -146,7 +161,7 @@ class TagwisePost(BaseModel):
     post_tag: str 
     category: CategoryForPost
     auther : AutherName 
-    created_datetime: datetime   
+    published_datetime: datetime   
     
     class Config():
         orm_mode = True
@@ -159,7 +174,15 @@ class SerachwisePost(BaseModel):
     post_tag: str
     category: CategoryForPost
     auther : AutherName
-    created_datetime: datetime   
+    published_datetime: datetime   
     
     class Config():
         orm_mode = True
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
