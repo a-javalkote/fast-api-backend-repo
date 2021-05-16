@@ -38,6 +38,7 @@ class Users(Base):
     last_name = Column(String)
     email_id = Column(String)
     email_verify = Column(String)
+    email_verify_code = Column(String)
     password_verify = Column(String)
     online_status = Column(String)
     role_id = Column(Integer, ForeignKey('tblrole.id'))

@@ -67,15 +67,30 @@ class Register(BaseModel):
     first_name: str
     last_name: str
     email_id: str
+    role_id: int = 2
+
+
+class ChangePassword(BaseModel):
+    password: str
     
-class Users(BaseModel):
+    class Config:
+	    orm_mode=True
+
+class VerifyEmailId(BaseModel):
+    email_verify_code: str
+
+class UpdateUsers(VerifyEmailId):
+    first_name: str
+    last_name: str
+
+    class Config:
+	    orm_mode=True
+
+class Users(UpdateUsers):
     id: int
     username: str
     password: str
-    first_name: str
-    last_name: str
-    email_id: str
-    role_id: int
+    role_id: int = 2
     status: int
 
     class Config:

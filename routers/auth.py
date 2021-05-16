@@ -20,3 +20,12 @@ def login(request: schemas.Login, db : Session = Depends(get_db)):
 @router.post('/register', status_code=200)
 def register(request: schemas.Register, db : Session = Depends(get_db)):
     return rauth.register_user(request, db)
+
+
+@router.put('/changepassword/{id}', status_code = 200)
+def update_user(id: int, request : schemas.ChangePassword, db : Session = Depends(get_db)):
+    return rauth.change_password(id, request, db)
+
+@router.get('/activation/{mailid}/{verifycode}', status_code = 200)
+def verify_emails_id(mailid: str, verifycode : str, db : Session = Depends(get_db)):
+    return rauth.verify_emailid(mailid, verifycode, db)
