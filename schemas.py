@@ -104,6 +104,7 @@ class Post(BaseModel):
     description: str
     meta_desc: str
     meta_keyword: str
+    post_img: str
     post_tag: str
     category_id: int
     auther_id: int
@@ -121,6 +122,7 @@ class SinglePost(BaseModel):
     slug: str
     description: str 
     post_tag: str
+    post_img: str
     category: CategoryForPost
     auther : AutherName
     meta_desc: str
@@ -149,6 +151,7 @@ class CategorywisePost(BaseModel):
     title: str
     slug: str
     short_desc: str 
+    post_img: str
     post_tag: str
     auther : AutherName  
     published_datetime: datetime   
@@ -161,6 +164,7 @@ class AutherwisePost(BaseModel):
     title: str
     slug: str
     short_desc: str 
+    post_img: str
     post_tag: str
     category: CategoryForPost
     published_datetime: datetime   
@@ -172,7 +176,8 @@ class TagwisePost(BaseModel):
     id: int
     title: str
     slug: str
-    short_desc: str 
+    short_desc: str
+    post_img: str
     post_tag: str 
     category: CategoryForPost
     auther : AutherName 
@@ -186,6 +191,7 @@ class SerachwisePost(BaseModel):
     title: str
     slug: str
     short_desc: str
+    post_img: str
     post_tag: str
     category: CategoryForPost
     auther : AutherName
