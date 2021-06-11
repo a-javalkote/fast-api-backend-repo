@@ -54,6 +54,7 @@ class Post(Base):
     slug = Column(String)
     short_desc = Column(Text)
     description = Column(Text)
+    post_img = Column(Text)
     post_tag = Column(Text)
     category_id = Column(Integer, ForeignKey('tblcategory.id'))
     auther_id = Column(Integer, ForeignKey('tblusers.id'))
